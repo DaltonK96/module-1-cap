@@ -19,8 +19,6 @@ public class VendingMachineMenu {
     private final Menu menu;
 
 
-
-
     public VendingMachineMenu(Menu menu) {
         this.menu = menu;
     }
@@ -35,7 +33,22 @@ public class VendingMachineMenu {
                 vendingMachine.getItems();
                 vendingMachine.displayItems();
             } else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-                // do purchase
+                // do
+                String purchaseMenuOptionsFeedMoney = "Feed money";
+                String purchaseMenuOptionsSelectProduct = "Select product";
+                String purchaseMenuOptionsFinishTransaction = "Finish transaction";
+                String[] MAIN_PURCHASE_OPTIONS = {purchaseMenuOptionsFeedMoney, purchaseMenuOptionsSelectProduct, purchaseMenuOptionsFinishTransaction};
+                String purchaseChoice = (String) menu.getChoiceFromOptions(MAIN_PURCHASE_OPTIONS);
+                Wallet wallet = new Wallet();
+                System.out.println(" Current Money Provided " + wallet.getWallet());
+                if ( purchaseChoice.equals(purchaseMenuOptionsFeedMoney)){
+
+
+                }else if ( purchaseChoice. equals( purchaseMenuOptionsSelectProduct)){
+
+                }else if ( purchaseChoice.equals(purchaseMenuOptionsFinishTransaction)){
+
+                }
             } else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
                 // Exit
             }
@@ -48,9 +61,10 @@ public class VendingMachineMenu {
         VendingMachineMenu VM = new VendingMachineMenu(menu);
         VM.run();
     }
-   // public Items (String itemName, BigDecimal price, String slotLocation, String inputType)
+    // public Items (String itemName, BigDecimal price, String slotLocation, String inputType)
 
     //Items newItem = new Items{
+
 
 }
 

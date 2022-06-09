@@ -1,5 +1,6 @@
 import com.techelevator.view.Menu;
 
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 
 public class VendingMachineMenu {
@@ -24,12 +25,15 @@ public class VendingMachineMenu {
         this.menu = menu;
     }
 
-    public void run() {
+    public void run() throws FileNotFoundException {
         while (true) {
             String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
             if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
                 // display vending machine items
+                VendingMachine vendingMachine = new VendingMachine();
+                vendingMachine.getItems();
+                vendingMachine.displayItems();
             } else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
                 // do purchase
             } else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
@@ -38,7 +42,8 @@ public class VendingMachineMenu {
         }
     }
 
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws FileNotFoundException {
         Menu menu = new Menu(System.in, System.out);
         VendingMachineMenu VM = new VendingMachineMenu(menu);
         VM.run();

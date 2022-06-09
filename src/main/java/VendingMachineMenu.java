@@ -1,7 +1,8 @@
-import com.techelevator.VendingMachineCLI;
 import com.techelevator.view.Menu;
 
-public class VendingMachine {
+import java.math.BigDecimal;
+
+public class VendingMachineMenu {
     // Displays Iteams
     // Getts / Setters
     // data file
@@ -13,11 +14,13 @@ public class VendingMachine {
     private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
     private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
     private static final String MAIN_MENU_OPTION_EXIT = "Exit";
-    private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE,MAIN_MENU_OPTION_EXIT };
+    private static final String[] MAIN_MENU_OPTIONS = {MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT};
     private final Menu menu;
 
 
-    public VendingMachine(Menu menu) {
+
+
+    public VendingMachineMenu(Menu menu) {
         this.menu = menu;
     }
 
@@ -37,14 +40,17 @@ public class VendingMachine {
 
     public static void main(String[] args) {
         Menu menu = new Menu(System.in, System.out);
-        VendingMachine VM = new VendingMachine(menu);
+        VendingMachineMenu VM = new VendingMachineMenu(menu);
         VM.run();
-    }  Items newItem = new Items{
-
     }
+   // public Items (String itemName, BigDecimal price, String slotLocation, String inputType)
 
+    //Items newItem = new Items{
 
 }
+
+
+
 
 
 

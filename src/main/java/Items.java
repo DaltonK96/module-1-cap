@@ -22,6 +22,11 @@ public class Items {
 
    }
 
+   public int stockRemove() {
+       stock = stock - 1;
+               return stock;
+   }
+
     public String getInputType() {
         return inputType;
     }

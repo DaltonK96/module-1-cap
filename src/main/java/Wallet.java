@@ -13,4 +13,11 @@ public class Wallet {
          wallet = wallet.add(feedMoney);
          return wallet;
    }
+
+   public BigDecimal payment(BigDecimal price) {
+        wallet = wallet.subtract(price);
+        return wallet;
+
+
+   }
 }

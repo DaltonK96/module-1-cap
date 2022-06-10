@@ -24,6 +24,8 @@ public class VendingMachineMenu {
     }
 
     public void run() throws FileNotFoundException {
+        Wallet wallet = new Wallet();
+
         while (true) {
             String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
             VendingMachine vendingMachine = new VendingMachine();
@@ -39,7 +41,7 @@ public class VendingMachineMenu {
                 String purchaseMenuOptionsFinishTransaction = "Finish transaction";
                 String[] MAIN_PURCHASE_OPTIONS = {purchaseMenuOptionsFeedMoney, purchaseMenuOptionsSelectProduct, purchaseMenuOptionsFinishTransaction};
                 String purchaseChoice = (String) menu.getChoiceFromOptions(MAIN_PURCHASE_OPTIONS);
-                Wallet wallet = new Wallet();
+
                 System.out.println(" Current Money Provided " + wallet.getWallet());
                 if ( purchaseChoice.equals(purchaseMenuOptionsFeedMoney)){
                     wallet.feedMoney();
@@ -49,6 +51,8 @@ public class VendingMachineMenu {
                 }else if ( purchaseChoice. equals( purchaseMenuOptionsSelectProduct)){
                     vendingMachine.getItems();
                     vendingMachine.displayItems();
+
+                    vendingMachine.purchaseItems(wallet);
 
                 }else if ( purchaseChoice.equals(purchaseMenuOptionsFinishTransaction)){
 

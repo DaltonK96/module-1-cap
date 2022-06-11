@@ -2,6 +2,7 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,141 +45,144 @@ public class VendingMachine {
         BigDecimal price = currentItem.getPrice();
         int comparingBalance = price.compareTo(money.getWallet());
 
+
         String slogan = "";
-        if (currentItem.getInputType().equals("Chip"))
-        {
+        if (currentItem.getInputType().equals("Chip")) {
             slogan = crunch;
-        } else if (currentItem.getInputType().equals("Candy"))
-        {
+        } else if (currentItem.getInputType().equals("Candy")) {
             slogan = munch;
-        } else if (currentItem.getInputType().equals("Drink"))
-        {
+        } else if (currentItem.getInputType().equals("Drink")) {
             slogan = cheersGlug;
-        } else if(currentItem.getInputType().equals("Gum"))
-        {
+        } else if (currentItem.getInputType().equals("Gum")) {
             slogan = chewPop;
         }
-        if (comparingBalance < 0) {
 
 
-            if (purchaseInput.equals(optionsA1)) {
-                currentItem.stockRemove();
-                money.payment(price);
-
-                System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                System.out.println(slogan);
 
 
-            } else if (purchaseInput.equals(optionsA2)) {
-                currentItem.stockRemove();
-                money.payment(price);
+            if (comparingBalance < 0) {
 
-                System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                System.out.println(slogan);
 
-            } else if (purchaseInput.equals(optionsA3)) {
-                currentItem.stockRemove();
-                money.payment(price);
+                if (purchaseInput.equals(optionsA1)) {
+                    currentItem.stockRemove();
+                    money.payment(price);
 
-                System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                System.out.println(slogan);
+                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
+                    System.out.println(slogan);
 
-            } else if (purchaseInput.equals(optionsA4)) {
-                currentItem.stockRemove();
-                money.payment(price);
 
-                System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                System.out.println(slogan);
+                } else if (purchaseInput.equals(optionsA2)) {
+                    currentItem.stockRemove();
+                    money.payment(price);
 
-            } else if (purchaseInput.equals(optionsB1)) {
-                currentItem.stockRemove();
-                money.payment(price);
+                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
+                    System.out.println(slogan);
 
-                System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                System.out.println(slogan);
+                } else if (purchaseInput.equals(optionsA3)) {
+                    currentItem.stockRemove();
+                    money.payment(price);
 
-            } else if (purchaseInput.equals(optionsB2)) {
-                currentItem.stockRemove();
-                money.payment(price);
+                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
+                    System.out.println(slogan);
 
-                System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                System.out.println(slogan);
+                } else if (purchaseInput.equals(optionsA4)) {
+                    currentItem.stockRemove();
+                    money.payment(price);
 
-            } else if (purchaseInput.equals(optionsB3)) {
-                currentItem.stockRemove();
-                money.payment(price);
+                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
+                    System.out.println(slogan);
 
-                System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                System.out.println(slogan);
+                } else if (purchaseInput.equals(optionsB1)) {
+                    currentItem.stockRemove();
+                    money.payment(price);
 
-            } else if (purchaseInput.equals(optionsB4)) {
-                currentItem.stockRemove();
-                money.payment(price);
+                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
+                    System.out.println(slogan);
 
-                System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                System.out.println(slogan);
+                } else if (purchaseInput.equals(optionsB2)) {
+                    currentItem.stockRemove();
+                    money.payment(price);
 
-            } else if (purchaseInput.equals(optionsC1)) {
-                currentItem.stockRemove();
-                money.payment(price);
+                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
+                    System.out.println(slogan);
 
-                System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                System.out.println(slogan);
+                } else if (purchaseInput.equals(optionsB3)) {
+                    currentItem.stockRemove();
+                    money.payment(price);
 
-            } else if (purchaseInput.equals(optionsC2)) {
-                currentItem.stockRemove();
-                money.payment(price);
+                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
+                    System.out.println(slogan);
 
-                System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                System.out.println(slogan);
+                } else if (purchaseInput.equals(optionsB4)) {
+                    currentItem.stockRemove();
+                    money.payment(price);
 
-            } else if (purchaseInput.equals(optionsC3)) {
-                currentItem.stockRemove();
-                money.payment(price);
+                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
+                    System.out.println(slogan);
 
-                System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                System.out.println(slogan);
+                } else if (purchaseInput.equals(optionsC1)) {
+                    currentItem.stockRemove();
+                    money.payment(price);
 
-            } else if (purchaseInput.equals(optionsC4)) {
-                currentItem.stockRemove();
-                money.payment(price);
+                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
+                    System.out.println(slogan);
 
-                System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                System.out.println(slogan);
+                } else if (purchaseInput.equals(optionsC2)) {
+                    currentItem.stockRemove();
+                    money.payment(price);
 
-            } else if (purchaseInput.equals(optionsD1)) {
-                currentItem.stockRemove();
-                money.payment(price);
+                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
+                    System.out.println(slogan);
 
-                System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                System.out.println(slogan);
+                } else if (purchaseInput.equals(optionsC3)) {
+                    currentItem.stockRemove();
+                    money.payment(price);
 
-            } else if (purchaseInput.equals(optionsD2)) {
-                currentItem.stockRemove();
-                money.payment(price);
+                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
+                    System.out.println(slogan);
 
-                System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                System.out.println(slogan);
+                } else if (purchaseInput.equals(optionsC4)) {
+                    currentItem.stockRemove();
+                    money.payment(price);
 
-            } else if (purchaseInput.equals(optionsD3)) {
-                currentItem.stockRemove();
-                money.payment(price);
+                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
+                    System.out.println(slogan);
 
-                System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                System.out.println(slogan);
+                } else if (purchaseInput.equals(optionsD1)) {
+                    currentItem.stockRemove();
+                    money.payment(price);
 
-            } else if (purchaseInput.equals(optionsD4)) {
-                currentItem.stockRemove();
-                money.payment(price);
+                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
+                    System.out.println(slogan);
 
-                System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                System.out.println(slogan);
+                } else if (purchaseInput.equals(optionsD2)) {
+                    currentItem.stockRemove();
+                    money.payment(price);
 
-            } else {
-                System.out.println("Invalid Code!");
+                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
+                    System.out.println(slogan);
+
+                } else if (purchaseInput.equals(optionsD3)) {
+                    currentItem.stockRemove();
+                    money.payment(price);
+
+                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
+                    System.out.println(slogan);
+
+                } else if (purchaseInput.equals(optionsD4)) {
+                    currentItem.stockRemove();
+                    money.payment(price);
+
+                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
+                    System.out.println(slogan);
+
+                } else {
+                    System.out.println("Invalid Code!");
+                }
             }
+
         }
-    }
+
 
 
 

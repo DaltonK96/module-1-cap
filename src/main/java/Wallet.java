@@ -13,8 +13,10 @@ public class Wallet {
         this.wallet = wallet;
     }
 
-    public BigDecimal feedMoney() {
-        wallet = wallet.add(feedMoney);
+    public BigDecimal feedMoney(BigDecimal money,Logger log) {
+        wallet = wallet.add(money);
+
+        log.log(" FEED MONEY: $" + money+ ".00 $" + getWallet());
         return wallet;
     }
 
@@ -25,42 +27,46 @@ public class Wallet {
 
     }
 
-    public void finishTransaction(Wallet remainingMoney) {
-        BigDecimal noMoney = new BigDecimal("0.00");
+    public void finishTransaction(Wallet remainingMoney,Logger log) {
 
-        BigDecimal remainingMoneyWallet = remainingMoney.getWallet();
+        //get the money in our wallet
+        BigDecimal wallet = remainingMoney.getWallet();
 
+        //set up variables for different coin types
         BigDecimal quarter = new BigDecimal("0.25");
         BigDecimal dime = new BigDecimal("0.10");
         BigDecimal nickel = new BigDecimal("0.05");
 
-        int counter = 0;
-        int quarterCounter = 0;
-        int nickelCounter = 0;
-        int dimeCounter = 0;
-        BigDecimal broke = new BigDecimal("0.00");
+        log.log(" GIVE CHANGE: $" + wallet + " " + "$0.00");
 
-        int comparingBalance = remainingMoneyWallet.compareTo(noMoney);
-        while (comparingBalance < 0) {
-            if (remainingMoneyWallet.remainder(quarter).compareTo(broke)==0) {
-                quarterCounter++;
-                remainingMoneyWallet = remainingMoneyWallet.subtract(quarter);
+        //divide wallet by a quarter to see how many quarters are needed and set to an int for a whole number
+        BigDecimal numOfQuarters = wallet.divide(quarter);
+        int quarterCount = numOfQuarters.intValue();
+        System.out.println("Quarters: " + quarterCount);
 
-                }
+        //remove the amount of quarters from our balance in wallet
+        BigDecimal quarterMoney = quarter.multiply(BigDecimal.valueOf(quarterCount));
+        wallet = wallet.subtract(quarterMoney);
 
-               else if (remainingMoneyWallet.remainder(dime).compareTo(broke)==0) {
-                    dimeCounter++;
-                    remainingMoneyWallet = remainingMoneyWallet.subtract(dime);
+        //divide wallet by a dime to see how many dimes are needed and set to an int for a whole number
+        BigDecimal numOfDimes = wallet.divide(dime);
+        int dimeCount = numOfDimes.intValue();
+        System.out.println("Dimes: " + dimeCount);
 
+        //remove the amount of dimes from our balance in wallet
+        BigDecimal dimeMoney = dime.multiply(BigDecimal.valueOf(dimeCount));
+        wallet = wallet.subtract(dimeMoney);
 
-                    }else if (remainingMoneyWallet.remainder(nickel).compareTo(broke)==0) {
-                        nickelCounter++;
-                        remainingMoneyWallet = remainingMoneyWallet.subtract(nickel);
+        //divide wallet by a nickel to see how many nickels are needed and set to an int for a whole number
+        BigDecimal numOfNickels = wallet.divide(nickel);
+        int nickelCount = numOfNickels.intValue();
+        System.out.println("Nickels: " + nickelCount);
 
-                    }
-                } System.out.println("Please collect your change! ");
-                System.out.println("Quarters:" + quarterCounter);
-                System.out.println("Dimes:" + dimeCounter);
-                System.out.println("Nickels:" + nickelCounter);
-            }
-        }
+        //remove the amount of nickels from our balance in wallet
+        BigDecimal nickelMoney = nickel.multiply(BigDecimal.valueOf(nickelCount));
+        wallet = wallet.subtract(nickelMoney);
+
+        System.out.println("Remaining Balance: " + wallet);
+
+    }
+}

@@ -13,7 +13,7 @@ public class VendingMachine {
     Map<String, Items> allItems = new HashMap<>();
 
 
-    public void purchaseItems(Wallet money) {
+    public void purchaseItems(Wallet money, Logger log) {
         String optionsA1 = "A1";
         String optionsA2 = "A2";
         String optionsA3 = "A3";
@@ -179,7 +179,11 @@ public class VendingMachine {
                 } else {
                     System.out.println("Invalid Code!");
                 }
+
+                log.log(" " + currentItem.getItemName() + " " + currentItem.getSlotLocation() + " $" + price + " $" + money.getWallet());
             }
+
+
 
         }
 

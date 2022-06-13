@@ -80,6 +80,7 @@ public class VendingMachineMenu {
 
                 } else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
                     // Exit
+                break;
                 }
             }
         }

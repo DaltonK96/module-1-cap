@@ -16,7 +16,7 @@ public class Wallet {
     public BigDecimal feedMoney(BigDecimal money,Logger log) {
         wallet = wallet.add(money);
 
-        log.log(" FEED MONEY: " + money + getWallet());
+        log.log(" FEED MONEY: $" + money+ ".00 $" + getWallet());
         return wallet;
     }
 

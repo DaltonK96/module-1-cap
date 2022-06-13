@@ -180,7 +180,7 @@ public class VendingMachine {
                     System.out.println("Invalid Code!");
                 }
 
-                log.log(" " + currentItem.getItemName() + " " + currentItem.getSlotLocation() + " " + price + " " + money.getWallet());
+                log.log(" " + currentItem.getItemName() + " " + currentItem.getSlotLocation() + " $" + price + " $" + money.getWallet());
             }
 
 

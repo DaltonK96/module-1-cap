@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 
 public class VendingMachineMenu {
     // Displays Iteams
@@ -46,33 +47,36 @@ public class VendingMachineMenu {
                 String purchaseMenuOptionsFinishTransaction = "Finish transaction";
                 String[] MAIN_PURCHASE_OPTIONS = {purchaseMenuOptionsFeedMoney, purchaseMenuOptionsSelectProduct, purchaseMenuOptionsFinishTransaction};
                 String purchaseChoice = (String) menu.getChoiceFromOptions(MAIN_PURCHASE_OPTIONS);
-                File log = new File("C:\\Users\\Student\\workspace\\nlr-8-module-1-capstone-orange-team-4\\src\\main\\java\\Log.txt");
-                try (PrintWriter logWriter = new PrintWriter(log)) {
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                    Date date = new Date();
+
+                Logger log = new Logger();
 
 
 
                     System.out.println(" Current Money Provided " + wallet.getWallet());
                     if (purchaseChoice.equals(purchaseMenuOptionsFeedMoney)) {
-                        wallet.feedMoney();
+
+                        System.out.println("Please enter dollar amount you want to feed: ");
+                        Scanner moneyInput = new Scanner(System.in);
+                        String moneyEntered = moneyInput.nextLine();
+                        int moneyInt = Integer.parseInt(moneyEntered);
+                        BigDecimal moneyBigDecimal = BigDecimal.valueOf(moneyInt);
+
+                        wallet.feedMoney(moneyBigDecimal,log);
                         System.out.println("New Balance is: " + wallet.getWallet());
-                       logWriter.println(formatter.format(date)+" FEED MONEY:"  + wallet.getWallet()+ wallet.getWallet());
+
 
 
                     } else if (purchaseChoice.equals(purchaseMenuOptionsSelectProduct)) {
                         vendingMachine.getItems();
                         vendingMachine.displayItems();
 
-                        vendingMachine.purchaseItems(wallet);
-                        logWriter.println(formatter.format(date)+ vendingMachine.purchaseItems(wallet).currentItem + wallet.getWallet()+ wallet.getWallet())
+                        vendingMachine.purchaseItems(wallet, log);
+
 
                     } else if (purchaseChoice.equals(purchaseMenuOptionsFinishTransaction)) {
-                        wallet.finishTransaction(wallet);
+                        wallet.finishTransaction(wallet, log);
 
                     }
-                } catch (FileNotFoundException ex)
-                    System.out.println("File not found");
 
                 } else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
                     // Exit

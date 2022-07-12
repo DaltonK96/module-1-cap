@@ -3,7 +3,6 @@ import java.math.BigDecimal;
 public class Wallet {
 
     private BigDecimal wallet = new BigDecimal("0.00");
-    private BigDecimal feedMoney = new BigDecimal("5.00");
 
     public BigDecimal getWallet() {
         return wallet;
@@ -13,10 +12,16 @@ public class Wallet {
         this.wallet = wallet;
     }
 
-    public BigDecimal feedMoney(BigDecimal money,Logger log) {
+    public BigDecimal feedMoney(BigDecimal money,Logger log)
+    {
+        if (money.compareTo(BigDecimal.ZERO)> 0)
+        {
         wallet = wallet.add(money);
 
         log.log(" FEED MONEY: $" + money+ ".00 $" + getWallet());
+        return wallet;
+        }
+        System.out.println(money + " is not a valid entry.");
         return wallet;
     }
 

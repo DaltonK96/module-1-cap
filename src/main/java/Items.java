@@ -1,57 +1,30 @@
 import java.math.BigDecimal;
 
-public class Items {
-    // Each item has a name and Price
-    // chips
-    // Drinks
-    // Gum
-    // Candy
-
-   private String itemName;
-   private BigDecimal price;
-   private String slotLocation;
-   private String inputType;
-   private int stock = 5;
-
-    String crunch = "Crunch Crunch, Crunch!";
-    String munch = "Munch Munch, Mmm-Good!";
-    String cheersGlug = "Cheers Glug, Glug!";
-    String chewPop = "Chew Chew, Pop!";
+public class Items
+{
+    private String itemName;
+    private BigDecimal price;
+    private String slotLocation;
+    private String inputType;
+    private int stock = 5;
 
 
-   public Items (String itemName, BigDecimal price, String slotLocation, String inputType){
-       this.itemName=itemName;
-       this.price=price;
-       this.slotLocation=slotLocation;
-       this.inputType=inputType;
-
-   }
-
-   public int stockRemove() {
-       stock = stock - 1;
-               return stock;
-   }
-
-   public void chips()
-   {
-       System.out.println(crunch);
-   }
-
-    public void candy()
+    public Items (String itemName, BigDecimal price, String slotLocation, String inputType)
     {
-        System.out.println(munch);
+        this.itemName=itemName;
+        this.price=price;
+        this.slotLocation=slotLocation;
+        this.inputType=inputType;
+
     }
 
-    public void drinks()
+    public int stockRemove()
     {
-        System.out.println(cheersGlug);
+        stock = stock - 1;
+        return stock;
     }
 
-    public void gum()
-    {
-        System.out.println(chewPop);
-    }
-
+    //getters
     public String getInputType() {
         return inputType;
     }

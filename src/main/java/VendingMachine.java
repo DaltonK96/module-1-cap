@@ -1,202 +1,119 @@
-
-
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 
-public class VendingMachine {
+public class VendingMachine
+{
     Map<String, Items> allItems = new HashMap<>();
 
+    //slogan options
+    private static final String chipSlogan = "Crunch Crunch, Crunch!";
+    private static final String candySlogan = "Munch Munch, Mmm-Good!";
+    private static final String drinkSlogan = "Cheers Glug, Glug!";
+    private static final String gumSlogan = "Chew Chew, Pop!";
 
-    public void purchaseItems(Wallet money, Logger log) {
-        String optionsA1 = "A1";
-        String optionsA2 = "A2";
-        String optionsA3 = "A3";
-        String optionsA4 = "A4";
-        String optionsB1 = "B1";
-        String optionsB2 = "B2";
-        String optionsB3 = "B3";
-        String optionsB4 = "B4";
-        String optionsC1 = "C1";
-        String optionsC2 = "C2";
-        String optionsC3 = "C3";
-        String optionsC4 = "C4";
-        String optionsD1 = "D1";
-        String optionsD2 = "D2";
-        String optionsD3 = "D3";
-        String optionsD4 = "D4";
+    //slot options
+    private static final String optionsA1 = "A1";
+    private static final String optionsA2 = "A2";
+    private static final String optionsA3 = "A3";
+    private static final String optionsA4 = "A4";
+    private static final String optionsB1 = "B1";
+    private static final String optionsB2 = "B2";
+    private static final String optionsB3 = "B3";
+    private static final String optionsB4 = "B4";
+    private static final String optionsC1 = "C1";
+    private static final String optionsC2 = "C2";
+    private static final String optionsC3 = "C3";
+    private static final String optionsC4 = "C4";
+    private static final String optionsD1 = "D1";
+    private static final String optionsD2 = "D2";
+    private static final String optionsD3 = "D3";
+    private static final String optionsD4 = "D4";
 
-        String crunch = "Crunch Crunch, Crunch!";
-        String munch = "Munch Munch, Mmm-Good!";
-        String cheersGlug = "Cheers Glug, Glug!";
-        String chewPop = "Chew Chew, Pop!";
+    List<String> options = Arrays.asList(optionsA1,optionsA2,optionsA3,optionsA4,optionsB1,optionsB2,optionsB3,optionsB4,
+            optionsC1,optionsC2,optionsC3,optionsC4,optionsD1,optionsD2,optionsD3,optionsD4);
 
 
+    //method to purchase an item as long as you have enough money in your wallet
+    public void purchaseItems(Wallet money, Logger log)
+    {
+        //gets user input for the slot number of the item they'd like to select
         Scanner purchase = new Scanner(System.in);
         System.out.println("Please enter item selection: ");
         String purchaseInput = purchase.nextLine();
 
-        Items currentItem = allItems.get(purchaseInput);
-        BigDecimal price = currentItem.getPrice();
-        int comparingBalance = price.compareTo(money.getWallet());
-
-
         String slogan = "";
-        if (currentItem.getInputType().equals("Chip")) {
-            slogan = crunch;
-        } else if (currentItem.getInputType().equals("Candy")) {
-            slogan = munch;
-        } else if (currentItem.getInputType().equals("Drink")) {
-            slogan = cheersGlug;
-        } else if (currentItem.getInputType().equals("Gum")) {
-            slogan = chewPop;
-        }
 
 
+        //makes sure the user input is a valid slot number
+        if (options.contains(purchaseInput))
+        {
+            //gets the current item info based off of the user input
+            Items currentItem = allItems.get(purchaseInput);
+            BigDecimal price = currentItem.getPrice();
+            int comparingBalance = price.compareTo(money.getWallet());
+            int currentItemStock = currentItem.getStock();
+            String currentItemName = currentItem.getItemName();
 
+            //makes sure that the user has enough money in their wallet to afford item
+            if (comparingBalance < 0)
+            {
+                //makes sure the item is not sold out
+                if (currentItemStock != 0)
+                {
+                    //sets to slogan equal to the correct one based off of the item type
+                    switch (currentItem.getInputType()) {
+                        case "Chip":
+                            slogan = chipSlogan;
+                            break;
+                        case "Candy":
+                            slogan = candySlogan;
+                            break;
+                        case "Drink":
+                            slogan = drinkSlogan;
+                            break;
+                        case "Gum":
+                            slogan = gumSlogan;
+                            break;
+                    }
 
-            if (comparingBalance < 0) {
-
-
-                if (purchaseInput.equals(optionsA1)) {
+                    //removes the stock from the item in vending machine
                     currentItem.stockRemove();
+                    //removes the money from the users wallet
                     money.payment(price);
 
-                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
+                    //prints out the item name, price of item bought, and current balance in wallet
+                    System.out.println(currentItemName + " " + price + " " + money.getWallet());
+                    //prints the item slogan
                     System.out.println(slogan);
 
-
-                } else if (purchaseInput.equals(optionsA2)) {
-                    currentItem.stockRemove();
-                    money.payment(price);
-
-                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                    System.out.println(slogan);
-
-                } else if (purchaseInput.equals(optionsA3)) {
-                    currentItem.stockRemove();
-                    money.payment(price);
-
-                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                    System.out.println(slogan);
-
-                } else if (purchaseInput.equals(optionsA4)) {
-                    currentItem.stockRemove();
-                    money.payment(price);
-
-                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                    System.out.println(slogan);
-
-                } else if (purchaseInput.equals(optionsB1)) {
-                    currentItem.stockRemove();
-                    money.payment(price);
-
-                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                    System.out.println(slogan);
-
-                } else if (purchaseInput.equals(optionsB2)) {
-                    currentItem.stockRemove();
-                    money.payment(price);
-
-                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                    System.out.println(slogan);
-
-                } else if (purchaseInput.equals(optionsB3)) {
-                    currentItem.stockRemove();
-                    money.payment(price);
-
-                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                    System.out.println(slogan);
-
-                } else if (purchaseInput.equals(optionsB4)) {
-                    currentItem.stockRemove();
-                    money.payment(price);
-
-                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                    System.out.println(slogan);
-
-                } else if (purchaseInput.equals(optionsC1)) {
-                    currentItem.stockRemove();
-                    money.payment(price);
-
-                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                    System.out.println(slogan);
-
-                } else if (purchaseInput.equals(optionsC2)) {
-                    currentItem.stockRemove();
-                    money.payment(price);
-
-                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                    System.out.println(slogan);
-
-                } else if (purchaseInput.equals(optionsC3)) {
-                    currentItem.stockRemove();
-                    money.payment(price);
-
-                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                    System.out.println(slogan);
-
-                } else if (purchaseInput.equals(optionsC4)) {
-                    currentItem.stockRemove();
-                    money.payment(price);
-
-                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                    System.out.println(slogan);
-
-                } else if (purchaseInput.equals(optionsD1)) {
-                    currentItem.stockRemove();
-                    money.payment(price);
-
-                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                    System.out.println(slogan);
-
-                } else if (purchaseInput.equals(optionsD2)) {
-                    currentItem.stockRemove();
-                    money.payment(price);
-
-                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                    System.out.println(slogan);
-
-                } else if (purchaseInput.equals(optionsD3)) {
-                    currentItem.stockRemove();
-                    money.payment(price);
-
-                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                    System.out.println(slogan);
-
-                } else if (purchaseInput.equals(optionsD4)) {
-                    currentItem.stockRemove();
-                    money.payment(price);
-
-                    System.out.println(currentItem.getItemName() + " " + price + " " + money.getWallet());
-                    System.out.println(slogan);
-
-                } else {
-                    System.out.println("Invalid Code!");
+                    //logs the purchase to the log.txt file
+                    log.log(" " + currentItemName + " " + currentItem.getSlotLocation() + " $" + price + " $" + money.getWallet());
+                }//if the item is sold out then print this
+                else
+                {
+                    System.out.println(currentItemName + " is sold out!");
                 }
-
-                log.log(" " + currentItem.getItemName() + " " + currentItem.getSlotLocation() + " $" + price + " $" + money.getWallet());
             }
-
-
-
+        }//if the user inputs an invalid code then do this
+        else
+        {
+            System.out.println(purchaseInput + " is an Invalid Code!");
         }
+    }
 
 
-
-
-    public void getItems() throws FileNotFoundException {
-
+    //gets all the items available from the vendingmachine.csv file
+    public void getItems() throws FileNotFoundException
+    {
         File myFile = new File("C:\\Users\\Student\\workspace\\nlr-8-module-1-capstone-orange-team-4\\vendingmachine.csv");
-        try (Scanner vendingFile = new Scanner(myFile)) {
 
-
-            while (vendingFile.hasNextLine()) {
+        try (Scanner vendingFile = new Scanner(myFile))
+        {
+            while (vendingFile.hasNextLine())
+            {
 
                 String currentLine = vendingFile.nextLine();
                 String[] currentItem = currentLine.split("\\|");
@@ -208,21 +125,25 @@ public class VendingMachine {
 
             }
 
-
-        } catch (FileNotFoundException ex) {
-            System.out.println("if unable to create file");
+        } catch (FileNotFoundException ex)
+        {
+            System.out.println("Cannot Find File.");
         }
 
-        //Items newItems = new Items  (String itemName, BigDecimal price, String slotLocation, String inputType)
     }
 
-    public void displayItems() {
-        for (Items value : allItems.values()) {
-            if (value.getStock() == 0) {
-                System.out.println(value.getSlotLocation() + " " + value.getItemName() + " " + value.getPrice() + " SOLD OUT");
-            } else {
-                System.out.println(value.getSlotLocation() + " " + value.getItemName() + " " + value.getPrice() + " Stock amount = " + value.getStock());
 
+    //displays the items to the screen
+    public void displayItems()
+    {
+        for (Items value : allItems.values())
+        {
+            if (value.getStock() == 0)
+            {
+                System.out.println(value.getSlotLocation() + " " + value.getItemName() + " " + value.getPrice() + " SOLD OUT");
+            } else
+            {
+                System.out.println(value.getSlotLocation() + " " + value.getItemName() + " " + value.getPrice() + " Stock amount = " + value.getStock());
             }
         }
     }
